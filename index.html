@@ -1,0 +1,95 @@
+<!doctype html>
+<title>beerpong timer</title>
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+<style>
+body {
+    background: url("beerpongtimer.png");
+	font-family: 'Lato', sans-serif;
+    margin: 0;
+    
+}
+
+.wrap > div {
+    display: inline-block;
+    width: 49%;
+    padding: 50px 0px;
+}
+
+.wrap {
+    width: 85%;
+    text-align: center;
+    color: white;
+    margin-left: 86px;
+    /* margin-right: 232px; */
+}
+
+.wrap h2 {
+    text-transform: uppercase;
+}
+
+.timer {
+    width: 100%;
+    display: block;
+    font-size: 90pt;
+    font-weight: 700;
+}
+
+.buttons button {
+    padding: 10px 40px;
+    background-color: #946849;
+    color: white;
+    border: 0px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+</style>
+<div class="wrap" style="margin-top:250px;">
+  <div>
+   <h2> Left Table </h2>
+    <div class="timer" id="left-timer">
+      10:00
+    </div>
+    <div class="buttons" style="display:none;">
+      <button type="button">START</button>
+      <button type="button">RESET</button>
+    </div>
+  </div>
+
+  <div>
+   <h2> Right Table </h2>
+     <div class="timer" id="right-timer">
+      10:00
+    </div>
+    <div class="buttons" style="display:none;">
+      <button type="button">START</button>
+      <button type="button">RESET</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var global_source = new EventSource('/api/sse');
+global_source.addEventListener("reload", function(msg){
+  console.log("Remote page reload");
+  location.reload();
+})
+
+var bpsrc = new EventSource('/api/sub/beerpong');
+bpsrc.addEventListener("left-time", function(msg){
+  console.log(msg);
+  var json = JSON.parse(msg.data);
+  var leftTimer = document.querySelector("#left-timer");
+  leftTimer.innerHTML = json.time;
+})
+
+bpsrc.addEventListener("right-time", function(msg){
+  console.log(msg);
+  var json = JSON.parse(msg.data);
+  var rightTimer = document.querySelector("#right-timer");
+  rightTimer.innerHTML = json.time;
+})
+
+</script>

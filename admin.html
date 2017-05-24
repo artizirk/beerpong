@@ -1,0 +1,51 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<title>Beerpong admin</title>
+
+<style>
+h1 {
+    margin: 0;
+}
+button {
+    height: 40px;
+    width: 100px;
+    margin: 15px;
+}
+
+form {
+    display: inline;
+}
+</style>
+
+<iframe style="display:none" name="hidden-form"></iframe>
+
+<h1>Letf table</h1>
+
+<form action="/api/beerpong/left/pause" method=POST target="hidden-form">
+    <button type="submit">Left Pause</button>
+</form>
+
+<form action="/api/beerpong/left/start" method=POST target="hidden-form">
+    <button type="submit">Left Start</button>
+</form>
+
+<form action="/api/beerpong/left/reset" method=POST target="hidden-form">
+    <button type="submit">Left Reset</button>
+</form>
+
+
+<h1>Right table</h1>
+
+
+<form action="/api/beerpong/right/pause" method=POST target="hidden-form">
+    <button type="submit">Right Pause</button>
+</form>
+
+<form action="/api/beerpong/right/start" method=POST target="hidden-form">
+    <button type="submit">Right Start</button>
+</form>
+
+<form action="/api/beerpong/right/reset" method=POST target="hidden-form">
+    <button type="submit">Right Reset</button>
+</form>

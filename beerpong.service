@@ -1,0 +1,10 @@
+[Unit]
+Description=beerpong daemon
+After=nginx.service
+Requires=nginx.service
+
+[Service]
+ExecStart=/usr/local/bin/beerpong.py
+
+[Install]
+WantedBy=multi-user.target
